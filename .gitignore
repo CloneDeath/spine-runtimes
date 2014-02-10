@@ -34,10 +34,12 @@ spine-monogame/xamarinstudio-ios/src/obj
 spine-monogame/windows8-store/src/bin
 spine-monogame/windows8-store/src/obj
 
-spine-xna/bin
-spine-xna/obj
-spine-xna/example/bin
-spine-xna/example/obj
+spine-opentk/bin
+spine-opentk/obj
+spine-opentk/Example/bin
+spine-opentk/Example/obj
+
+
 
 spine-unity/Assets/Spine/spine-csharp
 spine-unity/Assets/Spine/spine-csharp.meta

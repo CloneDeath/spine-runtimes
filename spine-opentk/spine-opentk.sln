@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "spine-opentk-example", "Example\spine-opentk-example.csproj", "{3D309CFB-E3DC-4EA0-8966-AB0442C7CD04}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "spine-opentk", "spine-opentk.csproj", "{28F5EA85-74B1-4EB2-ACB4-FF5B3D08E0CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "spine-csharp", "..\spine-csharp\spine-csharp.csproj", "{94144E22-2431-4A8F-AC04-DEC22F7EDD8F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{28F5EA85-74B1-4EB2-ACB4-FF5B3D08E0CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28F5EA85-74B1-4EB2-ACB4-FF5B3D08E0CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28F5EA85-74B1-4EB2-ACB4-FF5B3D08E0CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28F5EA85-74B1-4EB2-ACB4-FF5B3D08E0CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94144E22-2431-4A8F-AC04-DEC22F7EDD8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94144E22-2431-4A8F-AC04-DEC22F7EDD8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94144E22-2431-4A8F-AC04-DEC22F7EDD8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94144E22-2431-4A8F-AC04-DEC22F7EDD8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D309CFB-E3DC-4EA0-8966-AB0442C7CD04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D309CFB-E3DC-4EA0-8966-AB0442C7CD04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D309CFB-E3DC-4EA0-8966-AB0442C7CD04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D309CFB-E3DC-4EA0-8966-AB0442C7CD04}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
