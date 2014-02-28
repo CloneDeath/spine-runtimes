@@ -3,64 +3,74 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Spine;
+using OpenTK;
 
 namespace Spine
 {
 	public class Avatar {
-		public SkeletonRenderer skeletonRenderer;
-		public Skeleton skeleton;
-		public AnimationState state;
-		public AnimationStateData stateData;
-		public float Scale = 1.0f;
+		public Vector3 Position;
+		public Vector2 Scale;
+
+		private SkeletonRenderer SkeletonRenderer;
+		private Skeleton Skeleton;
+		private AnimationState State;
+		private AnimationStateData StateData;
 
 		public Avatar(string AnimationFile)
 		{
-			skeletonRenderer = new SkeletonRenderer(true);
+			SkeletonRenderer = new SkeletonRenderer(Vector3.UnitY, Vector3.UnitZ);
 
 			String name = AnimationFile;
 
 			Atlas atlas = new Atlas(name + ".atlas", new OpenTKTextureLoader());
 			SkeletonJson json = new SkeletonJson(atlas);
-			skeleton = new Skeleton(json.ReadSkeletonData(name + ".json"));
-			skeleton.SetSlotsToSetupPose();
+			Skeleton = new Skeleton(json.ReadSkeletonData(name + ".json"));
+			Skeleton.SetSlotsToSetupPose();
 
 			// Define mixing between animations.
-			stateData = new AnimationStateData(skeleton.Data);
-			state = new AnimationState(stateData);
+			StateData = new AnimationStateData(Skeleton.Data);
+			State = new AnimationState(StateData);
 
-			skeleton.X = 0;
-			skeleton.Y = 0.1f;
-			skeleton.UpdateWorldTransform();
+			Skeleton.X = 0;
+			Skeleton.Y = 0;
+			Skeleton.UpdateWorldTransform();
 		}
 
-		public void Update(float dt)
+		public void Update(double DeltaTime)
 		{
-			state.Update(dt);
+			State.Update((float)DeltaTime);
 		}
 
 
-		public void Draw2D(float X, float Y) {
-			state.Apply(skeleton);
-			skeleton.X = X;
-			skeleton.Y = Y;
-			skeleton.RootBone.ScaleX = Scale;
-			skeleton.RootBone.ScaleY = Scale;
-			skeleton.UpdateWorldTransform();
-			skeletonRenderer.Draw(skeleton);
+		public void Draw2D(Vector2 Position) {
+			this.Draw2D(Position, Skeleton.RootBone.ScaleX, Skeleton.RootBone.ScaleY);
 		}
 
-		public void Draw2D(float X, float Y, float width, float height) {
-			state.Apply(skeleton);
-			skeleton.X = X;
-			skeleton.Y = Y;
-			float scaleX = skeleton.RootBone.ScaleX;
-			float scaleY = skeleton.RootBone.ScaleY;
-			skeleton.RootBone.ScaleX = width;
-			skeleton.RootBone.ScaleY = height;
-			skeleton.UpdateWorldTransform();
-			skeletonRenderer.Draw(skeleton);
-			skeleton.RootBone.ScaleX = scaleX;
-			skeleton.RootBone.ScaleY = scaleY;
+		public void Draw2D(Vector2 Position, float Width, float Height) {
+			State.Apply(Skeleton);
+			Skeleton.X = Position.X;
+			Skeleton.Y = Position.Y;
+			
+			//Copy Scale
+			float scaleX = Skeleton.RootBone.ScaleX;
+			float scaleY = Skeleton.RootBone.ScaleY;
+			Skeleton.RootBone.ScaleX = Width;
+			Skeleton.RootBone.ScaleY = Height;
+			Skeleton.UpdateWorldTransform();
+			SkeletonRenderer.Draw(Skeleton);
+
+			//Restore Scale
+			Skeleton.RootBone.ScaleX = scaleX;
+			Skeleton.RootBone.ScaleY = scaleY;
+		}
+
+		public void Draw3D(float X, float Y, float Z)
+		{
+			State.Apply(Skeleton);
+			Skeleton.RootBone.ScaleX = Scale;
+			Skeleton.RootBone.ScaleY = Scale;
+			Skeleton.UpdateWorldTransform();
+			SkeletonRenderer.Draw(Skeleton, Z);
 		}
 	}
 }

@@ -2,16 +2,19 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using OpenTK.Graphics.OpenGL;
+using OpenTK;
 
 namespace Spine {
 	public class SkeletonRenderer {
+		public Vector3 Up;
+		public Vector3 Forward;
 		float[] vertices = new float[8];
 
-		public SkeletonRenderer(bool YDown = false) {
-			Bone.yDown = YDown;
+		public SkeletonRenderer(Vector3 Up, Vector3 Forward) {
+			Bone.yDown = false;
 		}
 
-		public void Draw(Skeleton skeleton, float Z = 0.0f) {
+		public void Draw(Skeleton skeleton, Vector3 Position) {
 			List<Slot> DrawOrder = skeleton.DrawOrder;
 
 			float depth = Z;

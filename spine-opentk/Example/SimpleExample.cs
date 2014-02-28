@@ -13,23 +13,11 @@ namespace spine_opentk_example
 {
 	public class SimpleExample : GameWindow
 	{
-        const int fps_frames = 50;
-        private readonly List<long> ftime;
-        private readonly Stopwatch stopwatch;
-        private long lastTime;
-        private bool altDown = false;
-
-		Avatar Spineboy;
+		private Avatar Spineboy;
+		private bool altDown = false;
 
 		public SimpleExample() : base(1024, 768)
         {
-            ftime = new List<long>(fps_frames);
-            stopwatch = new Stopwatch();
-        }
-
-        public override void Dispose()
-        {
-            base.Dispose();
         }
 
         /// <summary>
@@ -55,22 +43,6 @@ namespace spine_opentk_example
             altDown = false;
         }
 
-        void Mouse_ButtonDown(object sender, MouseButtonEventArgs args)
-        {
-        }
-
-        void Mouse_ButtonUp(object sender, MouseButtonEventArgs args)
-        {
-        }
-
-        void Mouse_Move(object sender, MouseMoveEventArgs args)
-        {
-        }
-
-        void Mouse_Wheel(object sender, MouseWheelEventArgs args)
-        {
-        }
-
         /// <summary>
         /// Setup OpenGL and load resources here.
         /// </summary>
@@ -86,10 +58,7 @@ namespace spine_opentk_example
 			GL.AlphaFunc(AlphaFunction.Always, 0);
 
 			Spineboy = new Avatar(@"data\spineboy");
-			Spineboy.state.SetAnimation(0, "walk", true);
-
-            stopwatch.Restart();
-            lastTime = 0;
+			Spineboy.State.SetAnimation(0, "walk", true);
         }
 
         /// <summary>
@@ -112,13 +81,7 @@ namespace spine_opentk_example
         /// <remarks>There is no need to call the base implementation.</remarks>
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
-            if (ftime.Count == fps_frames)
-                ftime.RemoveAt(0);
-
-			Spineboy.Update((stopwatch.ElapsedMilliseconds - lastTime) / 1000.0f);
-
-            ftime.Add(stopwatch.ElapsedMilliseconds - lastTime);
-            lastTime = stopwatch.ElapsedMilliseconds;
+			Spineboy.Update(e.ElapsedTime);
         }
 
         /// <summary>
@@ -143,10 +106,9 @@ namespace spine_opentk_example
         {
 			using (SimpleExample example = new SimpleExample())
             {
-                example.Title = "Gwen-DotNet OpenTK test";
+                example.Title = "Spine OpenTK Test";
                 example.VSync = VSyncMode.On;
                 example.Run(30, 30);
-                example.TargetRenderFrequency = 60;
             }
         }
 	}
