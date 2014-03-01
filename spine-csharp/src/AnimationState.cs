@@ -121,6 +121,7 @@ namespace Spine {
 					Event e = events[ii];
 					current.OnEvent(this, i, e);
 					if (Event != null) Event(this, i, e);
+					if (e.Data.OnTrigger != null) e.Data.OnTrigger(this, e.Data);
 				}
 
 				current.lastTime = current.time;

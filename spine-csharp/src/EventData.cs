@@ -29,11 +29,13 @@
 using System;
 
 namespace Spine {
-	public class EventData {
+	public class EventData : EventArgs {
 		public String Name { get; private set; }
 		public int Int { get; set; }
 		public float Float { get; set; }
 		public String String { get; set; }
+
+		public EventHandler<EventData> OnTrigger;
 
 		public EventData (String name) {
 			if (name == null) throw new ArgumentNullException("name cannot be null.");
