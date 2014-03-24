@@ -59,7 +59,7 @@ namespace Spine
 		}
 
 		public BoundingBoxAttachment GetBoundingBox(string Name) {
-			Slot slot = Skeleton.DrawOrder.Find(s => s.Attachment.Name == Name);
+			Slot slot = Skeleton.DrawOrder.Find(s => s.Attachment != null && s.Attachment.Name == Name);
 			if(slot != null && slot.Attachment is BoundingBoxAttachment) {
 				BoundingBoxAttachment template = slot.Attachment as BoundingBoxAttachment;
 				BoundingBoxAttachment ret = new BoundingBoxAttachment(template.Name);
